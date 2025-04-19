@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+  <div class="container">
+    <h2>Register for an Event</h2>
+    <form method="POST">
+        <label for="name">Your Name:</label>
+        <input type="text" name="name" required>
+  
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+  
+        <label for="event">Select Event:</label>
+        <select name="event_id" required>
+          {% for event in events %}
+            <option value="{{ event.id }}">{{ event.name }}</option>
+          {% endfor %}
+        </select>
+  
+        <button type="submit">Register</button>
+        {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+    </form>
+  </div>
+  
+</body>
+</html>

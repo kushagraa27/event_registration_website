@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎉 Event Registration Portal</h1>
+            <nav>
+                <a href="/events" class="btn">View Events</a>
+                <a href="/registrations" class="btn">View Registrations</a>
+                <a href="/register" class="btn primary">Register for Event</a>
+                <a href="{{ url_for('admin_login') }}" class="btn">Login as Admin</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <p>Welcome! Use the options above to explore or register for upcoming events.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Eventify Inc.</p>
+    </footer>
+</body>
+</html>
