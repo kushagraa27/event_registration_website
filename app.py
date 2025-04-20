@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from models import db, Event, Registration
-from db_config import get_connection  # Still assuming you use raw SQL for some parts
+from db_config import get_connection  # Optional if you're not using raw SQL
 
 app = Flask(__name__)
-app.secret_key = 'flask_event_project_2025_secret_key'  # required for session/flash
+app.secret_key = 'flask_event_project_2025_secret_key'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///events.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -17,6 +17,7 @@ ADMIN_PASSWORD = 'password123'
 with app.app_context():
     db.create_all()
 
+    # Seed sample event if none exist
     if not Event.query.first():
         sample_event = Event(name="Hackathon 2025", date="2025-05-10", location="Virtual")
         db.session.add(sample_event)
@@ -103,7 +104,13 @@ def admin():
             flash('Please fill out all fields.')
 
     events = Event.query.all()
-    return render_template('admin.html', events=events)
+
+    # Fetch registrations with event name
+    registrations = Registration.query.join(Event, Registration.event_id == Event.id).add_columns(
+        Registration.id, Registration.name, Registration.email, Event.name.label("event_name")
+    ).all()
+
+    return render_template('admin.html', events=events, registrations=registrations)
 
 
 @app.route('/delete_event/<int:event_id>', methods=['POST'])
@@ -118,6 +125,21 @@ def delete_event(event_id):
         flash('Event deleted successfully!')
     else:
         flash('Event not found.')
+    return redirect(url_for('admin'))
+
+
+@app.route('/delete_registration/<int:reg_id>', methods=['POST'])
+def delete_registration(reg_id):
+    if not session.get('admin_logged_in'):
+        return redirect(url_for('admin_login'))
+
+    reg = Registration.query.get(reg_id)
+    if reg:
+        db.session.delete(reg)
+        db.session.commit()
+        flash('Registration deleted successfully!')
+    else:
+        flash('Registration not found.')
     return redirect(url_for('admin'))
 
 

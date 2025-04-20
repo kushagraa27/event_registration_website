@@ -32,19 +32,34 @@
     </form>
 
     <h3>Existing Events</h3>
-<div class="event-list">
-    {% for event in events %}
-        <div class="event-item">
-            <span>{{ event.name }} - {{ event.date }} - {{ event.location }}</span>
-            <form method="POST" action="{{ url_for('delete_event', event_id=event.id) }}">
-                <button type="submit" class="delete-btn">Delete</button>
-            </form>
-        </div>
-    {% endfor %}
-</div>
+    <div class="event-list">
+        {% for event in events %}
+            <div class="event-item">
+                <span>{{ event.name }} - {{ event.date }} - {{ event.location }}</span>
+                <form method="POST" action="{{ url_for('delete_event', event_id=event.id) }}">
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
 
+    <hr>
+    <h3>Registrations</h3>
+    <div class="registration-list">
+        {% for reg in registrations %}
+            <div class="registration-item">
+                <span>{{ reg.name }} ({{ reg.email }}) - Registered for: {{ reg.event_name }}</span>
+                <form method="POST" action="{{ url_for('delete_registration', reg_id=reg.id) }}">
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+            </div>
+        {% else %}
+            <p>No registrations yet.</p>
+        {% endfor %}
+    </div>
+
+    <br>
     | <a href="{{ url_for('admin_logout') }}">Logout</a>
-
     <a href="/">Back to Home</a>
 </body>
 </html>
