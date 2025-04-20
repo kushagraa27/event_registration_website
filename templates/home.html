@@ -23,29 +23,48 @@
           <p>Welcome! Use the options above to explore or register for upcoming events.</p>
   
           <div class="carousel-container">
-              <div class="carousel">
-                  <div class="slide">
-                      <a href="/register?event_id=1">
-                          <img src="{{ url_for('static', filename='images/swimming.jpg') }}" alt="Swimming Event">
-                          <p>Swimming</p>
-                      </a>
-                  </div>
-                  <div class="slide">
-                      <a href="/register?event_id=2">
-                          <img src="{{ url_for('static', filename='images/music.jpg') }}" alt="Music Event">
-                          <p>Music Concert</p>
-                      </a>
-                  </div>
-                  <div class="slide">
-                      <a href="/register?event_id=3">
-                          <img src="{{ url_for('static', filename='images/boxing.jpg') }}" alt="Boxing Event">
-                          <p>Boxing Match</p>
-                      </a>
-                  </div>
-              </div>
-              <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-              <button class="next" onclick="moveSlide(1)">&#10095;</button>
-          </div>
+            <div class="carousel">
+                <div class="slide">
+                    <a href="/register?event_id=1">
+                        <img src="{{ url_for('static', filename='images/swimming.jpg') }}" alt="Swimming">
+                        <p>Swimming</p>
+                    </a>
+                </div>
+                <div class="slide">
+                    <a href="/register?event_id=2">
+                        <img src="{{ url_for('static', filename='images/music.jpg') }}" alt="Music">
+                        <p>Music Concert</p>
+                    </a>
+                </div>
+                <div class="slide">
+                    <a href="/register?event_id=3">
+                        <img src="{{ url_for('static', filename='images/boxing.jpg') }}" alt="Boxing">
+                        <p>Boxing Match</p>
+                    </a>
+                </div>
+                <div class="slide">
+                    <a href="/register?event_id=4">
+                        <img src="{{ url_for('static', filename='images/hackathon.jpg') }}" alt="Hackathon">
+                        <p>Hackathon</p>
+                    </a>
+                </div>
+                <div class="slide">
+                    <a href="/register?event_id=5">
+                        <img src="{{ url_for('static', filename='images/dance.jpg') }}" alt="Dance">
+                        <p>Dancing</p>
+                    </a>
+                </div>
+                <div class="slide">
+                    <a href="/register?event_id=6">
+                        <img src="{{ url_for('static', filename='images/painting.jpg') }}" alt="Painting">
+                        <p>Painting</p>
+                    </a>
+                </div>
+            </div>
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+        
       </div>
   </main>
   
